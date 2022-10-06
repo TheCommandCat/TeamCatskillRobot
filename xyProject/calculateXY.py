@@ -5,7 +5,8 @@ import math
 from math import atan2, degrees, radians
 
 
-img = cv2.imread(r"C:\Users\TheCommandCat\PycharmProjects\TeamCatskillRobot\xyProject\board.png")
+img = cv2.imread(r"C:\Users\Gilad\Desktop\TeamCatskillRobot-main\TeamCatskillRobot\xyProject\board.png")
+img = cv2.resize(img, (960, 540))
 
 global counter
 counter = 1
@@ -60,15 +61,9 @@ def draw_circle(event, x, y, flags, param):
         case 2:
             if event == cv2.EVENT_LBUTTONDOWN:
                 cv2.circle(img, (x, y), 15, (255, 0, 0), -1)
-                angelB = round(getAngle([x, y], loc, [0,0]))
-                angelB2 = round(getAngle([0, 0], loc, [x, y]))
-                print("angleB:", angelB, angelB2, angelB+angelB2)
-                drawRobot(angelB2, y, 0)
-                drawRobot(angelB, y, 0)
-                drawRobot(x, angelB2, 0)
-                drawRobot(x, angelB, 0)
-                # angel = [x, y]
-                # print("angel:", x, y)
+                angelB = round(getAngle([loc[0], y], [x, y], loc))
+                print("angleB:", angelB)
+                drawRobot(x, y, angelB)
         case 3:
             if event == cv2.EVENT_LBUTTONDOWN:
                 cv2.circle(img, (x, y), 15, (0, 255, 255), -1)
@@ -82,10 +77,10 @@ def draw_circle(event, x, y, flags, param):
 cv2.namedWindow(winname="Title of Popup Window")
 cv2.setMouseCallback("Title of Popup Window", draw_circle)
 
-while True:
+while cv2.waitKey(10) & 0xFF != 27:
     cv2.imshow("Title of Popup Window", img)
 
-    if cv2.waitKey(10) & 0xFF == 27:
-        break
+    # if cv2.waitKey(10) & 0xFF == 27:
+    #     break
 
 cv2.destroyAllWindows()
