@@ -4,24 +4,13 @@ import sys
 import math
 from math import atan2, degrees, radians
 
-
-img = cv2.imread(r"C:\Users\Gilad\Desktop\TeamCatskillRobot-main\TeamCatskillRobot\xyProject\board.png")
-img = cv2.resize(img, (960, 540))
+# TODO: add comments for more readble code
+# remember to change it to your own path!
+img = cv2.imread(r"C:\Users\TheCommandCat\Desktop\TeamCatskillRobot\xyProject\board.png")
+img = cv2.resize(img, (1920, 1080))
 
 global counter
 counter = 1
-
-
-def get_angle(point_1, point_2): #These can also be four parameters instead of two arrays
-    angle = atan2(point_1[1] - point_2[1], point_1[0] - point_2[0])
-    
-    #Optional
-    angle = degrees(angle)
-    
-    # OR
-    angle = radians(angle)
-    
-    return angle
 
 def draw_angled_rec(x0, y0, width, height, angle, img):
 
@@ -57,18 +46,18 @@ def draw_circle(event, x, y, flags, param):
                 loc = [x,y]
                 print("loc:", x, y)
                 counter += 1
-                print("counter:", counter)
         case 2:
             if event == cv2.EVENT_LBUTTONDOWN:
                 cv2.circle(img, (x, y), 15, (255, 0, 0), -1)
-                angelB = round(getAngle([loc[0], y], [x, y], loc))
-                print("angleB:", angelB)
-                drawRobot(x, y, angelB)
+                angel = round(getAngle([loc[0], y], [x, y], loc))
+                print("angle:", angel)
+                drawRobot(loc[0], loc[1], angel)
+                counter += 1
         case 3:
             if event == cv2.EVENT_LBUTTONDOWN:
                 cv2.circle(img, (x, y), 15, (0, 255, 255), -1)
                 target = [x, y]
-                print("target:", x, y)
+                print("target:", target)
                 counter += 1
     if event == cv2.EVENT_MBUTTONDOWN:
         sys.stdout.flush()
@@ -79,8 +68,5 @@ cv2.setMouseCallback("Title of Popup Window", draw_circle)
 
 while cv2.waitKey(10) & 0xFF != 27:
     cv2.imshow("Title of Popup Window", img)
-
-    # if cv2.waitKey(10) & 0xFF == 27:
-    #     break
 
 cv2.destroyAllWindows()
