@@ -61,6 +61,9 @@ def draw_circle(event, x, y, flags, param):
         case 2:
             if event == cv2.EVENT_LBUTTONDOWN:
                 cv2.circle(img, (x, y), 15, (255, 0, 0), -1)
+                cv2.line(img, [loc[0], y], [x, y], (255,0,0), 10)
+                cv2.line(img, [x, y], loc, (0,255,0), 10)
+                cv2.line(img, [loc[0], y], loc, (0,0,255), 10)
                 angelB = round(getAngle([loc[0], y], [x, y], loc))
                 print("angleB:", angelB)
                 drawRobot(x, y, angelB)
