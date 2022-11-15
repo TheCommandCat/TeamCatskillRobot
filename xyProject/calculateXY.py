@@ -73,3 +73,9 @@ while cv2.waitKey(10) & 0xFF != 27:
     cv2.imshow("Title of Popup Window", img)
 
 cv2.destroyAllWindows()
+
+x = True
+while  1:
+    if x:
+        DoSomthin()
+    else: x = False
