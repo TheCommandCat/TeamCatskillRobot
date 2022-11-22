@@ -6,7 +6,7 @@ from math import atan2, degrees, radians
 
 # TODO: add comments for more readble code
 # remember to change it to your own path!
-img = cv2.imread(r"C:\Users\TheCommandCat\Desktop\TeamCatskillRobot\xyProject\board.png")
+img = cv2.imread(r"xyProject\board.png")
 img = cv2.resize(img, (1920, 1080))
 
 global counter
